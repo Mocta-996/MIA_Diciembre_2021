@@ -4,9 +4,9 @@
 // CLASE ANALIZADOR PARA INTERPRETAR LOS COMANDOS DE ENTRADA
 
 #include "Analizador.h"
+#include "MKdisco.h"
+#include "RMdisco.h"
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #define RED "\e[0;31m"  // rojo
 #define GRN "\e[0;32m" // verde
 #define CYN "\e[0;36m" // cian
@@ -76,7 +76,7 @@ void Analizador::Analizar_Comando(string _entrada) {
     {
         //verificar_exec(arrayinstrucciones);
     }else {
-        cout <<RED">> COMANDO NO VALIDO."<<endl;
+        cout <<RED">> COMANDO NO VALIDO:  "<<instruccion <<endl;
     }
 
 
@@ -167,9 +167,15 @@ void Analizador::verificar_mkdisk(vector <string> lineainstruccion)
         cout << "Unit: " << unit << endl;
         cout << "Fit: " << fit << endl;
 
-        //int s=stoi(size);
-        //Mkdisco crear;
-        //crear.Crear_Disco(s,f,u,path);
+        int s=stoi(size);
+        if(s){
+            MKdisco crear;
+            crear.Crear_Disco(s,fit,unit,path);
+        }else {
+            cout <<RED""<< "TAMAÑO DE DISCO NO VALIDO" <<CYN""<<endl;
+
+        }
+
     }else {
         cout <<RED""<< _error <<CYN""<<endl;
     }
@@ -212,10 +218,8 @@ void Analizador::verificar_rmdisk(vector <string> lineainstruccion)
     if(bandera){
         cout << "PARAMETROS OBTENIDOS RMDISK" <<endl;
         cout << "path: " << path << endl;
-
-        //int s=stoi(size);
-        //Mkdisco crear;
-        //crear.Crear_Disco(s,f,u,path);
+        RMdisco eliminar;
+        eliminar.Eliminar_disco(path);
     }else {
         cout <<RED""<< _error <<CYN""<<endl;
     }
@@ -242,6 +246,7 @@ string Analizador::AtributoComando(string comando)
     string atributo = comando.substr(pos + 2);
     return atributo;
 }
+
 // ---- funcion que obtiene la ruta completa
 string Analizador::RutaCompleta(vector<string> ruta, int pos)
 {

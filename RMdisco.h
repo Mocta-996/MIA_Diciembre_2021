@@ -6,8 +6,12 @@
 #define PROYECTO_1_RMDISCO_H
 
 
-class RMdisco {
+#include <string>
 
+class RMdisco {
+public:
+    RMdisco();
+    void Eliminar_disco(std::__cxx11::basic_string<char> path);
 };
 
 

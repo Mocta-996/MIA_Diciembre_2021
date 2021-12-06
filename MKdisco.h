@@ -6,8 +6,18 @@
 #define PROYECTO_1_MKDISCO_H
 
 
+#include <string> //string
+#include <vector>  // Libreria que contiene type Vector.
+#include <sstream> //stringstream
+#include <iostream> //cout, cin, getline, entre otras.
+#include "string.h"
+using namespace std;
 class MKdisco {
+public:
+    MKdisco();
 
+    void Crear_Disco(int size, std::__cxx11::basic_string<char> fit, std::__cxx11::basic_string<char> unit,
+                     std::__cxx11::basic_string<char> path);
 };
 
 

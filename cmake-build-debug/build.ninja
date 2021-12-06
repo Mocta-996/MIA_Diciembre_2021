@@ -84,6 +84,24 @@ build CMakeFiles/Proyecto_1.dir/Analizador.cpp.o: CXX_COMPILER__Proyecto_1_Debug
   OBJECT_DIR = CMakeFiles/Proyecto_1.dir
   OBJECT_FILE_DIR = CMakeFiles/Proyecto_1.dir
 
+build CMakeFiles/Proyecto_1.dir/Estructuras.cpp.o: CXX_COMPILER__Proyecto_1_Debug /home/pilo-tuy/Escritorio/MIA$ VACAS/Proyecto_1/Estructuras.cpp || cmake_object_order_depends_target_Proyecto_1
+  DEP_FILE = CMakeFiles/Proyecto_1.dir/Estructuras.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Proyecto_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/Proyecto_1.dir
+
+build CMakeFiles/Proyecto_1.dir/MKdisco.cpp.o: CXX_COMPILER__Proyecto_1_Debug /home/pilo-tuy/Escritorio/MIA$ VACAS/Proyecto_1/MKdisco.cpp || cmake_object_order_depends_target_Proyecto_1
+  DEP_FILE = CMakeFiles/Proyecto_1.dir/MKdisco.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Proyecto_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/Proyecto_1.dir
+
+build CMakeFiles/Proyecto_1.dir/RMdisco.cpp.o: CXX_COMPILER__Proyecto_1_Debug /home/pilo-tuy/Escritorio/MIA$ VACAS/Proyecto_1/RMdisco.cpp || cmake_object_order_depends_target_Proyecto_1
+  DEP_FILE = CMakeFiles/Proyecto_1.dir/RMdisco.cpp.o.d
+  FLAGS = -g -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Proyecto_1.dir
+  OBJECT_FILE_DIR = CMakeFiles/Proyecto_1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Proyecto_1
@@ -92,7 +110,7 @@ build CMakeFiles/Proyecto_1.dir/Analizador.cpp.o: CXX_COMPILER__Proyecto_1_Debug
 #############################################
 # Link the executable Proyecto_1
 
-build Proyecto_1: CXX_EXECUTABLE_LINKER__Proyecto_1_Debug CMakeFiles/Proyecto_1.dir/main.cpp.o CMakeFiles/Proyecto_1.dir/Analizador.cpp.o
+build Proyecto_1: CXX_EXECUTABLE_LINKER__Proyecto_1_Debug CMakeFiles/Proyecto_1.dir/main.cpp.o CMakeFiles/Proyecto_1.dir/Analizador.cpp.o CMakeFiles/Proyecto_1.dir/Estructuras.cpp.o CMakeFiles/Proyecto_1.dir/MKdisco.cpp.o CMakeFiles/Proyecto_1.dir/RMdisco.cpp.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/Proyecto_1.dir
   POST_BUILD = :

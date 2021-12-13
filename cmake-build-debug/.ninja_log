@@ -1,9 +1,9 @@
 # ninja log v5
-0	342	1638685215269142900	CMakeFiles/Proyecto_1.dir/main.cpp.o	4db369abaa374503
-2	545	1638766265462318511	CMakeFiles/Proyecto_1.dir/Analizador.cpp.o	b1b06f9cc132ef15
-373	457	1638769900363706725	Proyecto_1	fabd0322ace3eacd
-3	634	1638765038847361351	CMakeFiles/Proyecto_1.dir/Estructuras.cpp.o	36abf125e9b908e8
-0	373	1638769900279705778	CMakeFiles/Proyecto_1.dir/MKdisco.cpp.o	b6c57963ed4cf2cb
+1	749	1639351242939704401	CMakeFiles/Proyecto_1.dir/main.cpp.o	4db369abaa374503
+2	1352	1639345848886937347	CMakeFiles/Proyecto_1.dir/Fdisco.cpp.o	9aa0ec3a7f32bbf8
+1	1342	1639351243531711928	CMakeFiles/Proyecto_1.dir/Analizador.cpp.o	b1b06f9cc132ef15
+468	553	1639351694263466020	Proyecto_1	13c38f34b4033c26
+1	1627	1639342847923542956	CMakeFiles/Proyecto_1.dir/Estructuras.cpp.o	36abf125e9b908e8
 2	283	1638771429560852893	CMakeFiles/Proyecto_1.dir/RMdisco.cpp.o	ce39b5eca4a81aea
-1	513	1638771429788854887	CMakeFiles/Proyecto_1.dir/Analizador.cpp.o	b1b06f9cc132ef15
-513	588	1638771429864855552	Proyecto_1	1745b1a63f5c30ff
+5	1627	1639342848143547130	CMakeFiles/Proyecto_1.dir/MKdisco.cpp.o	b6c57963ed4cf2cb
+1	468	1639351694179465527	CMakeFiles/Proyecto_1.dir/Mount.cpp.o	b9fcaa8988e404f5

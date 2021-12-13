@@ -35,6 +35,14 @@ public:
     int RutaCompletaSaltos(vector<string> ruta, int pos);
 
     void verificar_rmdisk(vector<string> linecomand);
+
+    void verificar_fdisk(vector<string> lineainstruccion);
+
+    void verificar_mount(vector<string> lineainstruccion);
+
+    void verificar_unmount(vector<string> lineainstruccion);
+
+    void verificar_mkfs(vector<string> lineainstruccion);
 };
 
 #endif //PROYECTO_1_ANALIZADOR_H

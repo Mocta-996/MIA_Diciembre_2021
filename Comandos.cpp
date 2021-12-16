@@ -701,42 +701,54 @@ bool Comandos::Verificar_permiso(Estructuras::Inodo inodo, int per) {
 }
 
 //========================================= COMANDO LOGIN =======================================
-/*
-void Comandos::login(string id, string pwd, string user) {
-    // VERIFICAR SI EXISTE UNA SESION INICIADA
-    if(user_g.logged==false){
-        // STREAM
-        bool login = 0;
-        bool deleted_user = 0;
 
-        // BUSCAR BLOQUE DE USUARIOS
+void Comandos::login(string id, string pwd, string user) {
+    // VERIFICANDO SESION ACTIVA
+    if(user_g.logged==false){
+        bool logueado = false;
+        bool eliminar_logueado = false;
+
         stringstream ss(obtener_usuarios(id));
         string item;
         vector<string> user_lines;
         while (getline(ss, item, '\n')){
             user_lines.push_back(item);
         }
-        //vector<string> user_lines = get_users(id);
-
-        // LEER
-        for (int line_index = 0; line_index < user_lines.size();
-             line_index++) {
-            UserOrGroup user_info =
-                    get_user_line_info(user_lines.at(line_index));
+        for (int i = 0; i < user_lines.size();i++) {
+            Usuario_log Info_u ;
+            vector <string> usuario;
+            stringstream ss(user_lines.at(i));
+            string item;
+            while (getline(ss, item, ',')){
+                usuario.push_back(item);
+            }
+            for(int u=0;u<usuario.size();u++){
+                if (u == 0) {
+                    Info_u.uid = usuario.at(u);
+                } else if (u == 1) {
+                    Info_u.tipo = usuario.at(u);
+                } else if (u == 2) {
+                    Info_u.grupo = usuario.at(u);
+                } else if (u == 3) {
+                    Info_u.nombre = usuario.at(u);
+                } else if (u == 4) {
+                    Info_u.pwd= usuario.at(u);
+                }
+            }
 
             // LOGIN
-            if (user_info.type == "U") {
-                if (user_info.name == props.user && user_info.pwd == props.pwd) {
-                    if (user_info.uid != "0") {
-                        global_user.id = props.id;
-                        global_user.user = user_info.name;
-                        global_user.logged = 1;
-                        global_user.pwd = user_info.pwd;
-                        global_user.grp = user_info.grp;
-                        global_user.uid = user_info.uid;
-                        global_user.gid = user_info.uid;
+            if (Info_u.tipo == "U") {
+                if (Info_u.nombre==user && Info_u.pwd == pwd) {
+                    if (Info_u.uid != "0") {
+                        user_g.id =id;
+                        user_g.user = Info_u.nombre;
+                        user_g.logged = 1;
+                        user_g.pwd = Info_u.pwd;
+                        user_g.group = Info_u.grupo;
+                        user_g.uid = Info_u.uid;
+                        user_g.gid = Info_u.uid;
                     } else
-                        deleted_user = 1;
+                        eliminar_logueado = 1;
 
                     break;
                 }
@@ -744,32 +756,42 @@ void Comandos::login(string id, string pwd, string user) {
         }
 
         // BUSCAR GRUPO
-        for (int line_index = 0; line_index < user_lines.size();
-             line_index++) {
-            UserOrGroup user_info =
-                    get_user_line_info(user_lines.at(line_index));
-
-            if (user_info.type == "G") {
-                if (user_info.grp == global_user.grp) {
-                    if (user_info.uid != "0") {
-                        global_user.gid = user_info.uid;
+        for (int i = 0; i < user_lines.size();i++) {
+            Usuario_log Info_u ;
+            vector <string> usuario;
+            stringstream ss(user_lines.at(i));
+            string item;
+            while (getline(ss, item, ',')){
+                usuario.push_back(item);
+            }
+            for(int u=0;u<usuario.size();u++){
+                if (u == 0) {
+                    Info_u.uid = usuario.at(u);
+                } else if (u == 1) {
+                    Info_u.tipo = usuario.at(u);
+                } else if (u == 2) {
+                    Info_u.grupo = usuario.at(u);
+                } else if (u == 3) {
+                    Info_u.nombre = usuario.at(u);
+                } else if (u == 4) {
+                    Info_u.pwd= usuario.at(u);
+                }
+            }
+            if (Info_u.tipo == "G") {
+                if (Info_u.grupo == user_g.group) {
+                    if (Info_u.uid != "0") {
+                        user_g.gid = Info_u.uid;
                     } else
-                        deleted_user = 1;
-
+                        eliminar_logueado = 1;
                     break;
                 }
             }
         }
-
-        // NO SE ENCONTRO NINGUN USUARIO
-        if (!deleted_user) {
-            if (!global_user.logged)
-                print_err("USERS_ERR", "No se encontro ningun usuario \"" +
-                                       props.user + "\".");
+        if (!eliminar_logueado) {
+            if (!user_g.logged)
+                cout <<RED " USUARIO NO ENCONTRADO!  " <<YLLW ""<<user<< CYN""<< endl;
         } else
-            print_err("USER_ERR", "El usuario esta eliminado.");
-
-
+            cout <<RED " EL USUARIO SE HA ELIMINADO!  " <<YLLW ""<<user<< CYN""<< endl;
     }
     else{
         cout <<RED " EXISTE UNA SESION INICIADA, ES NECESARIO CERRAR SESIÓN " << CYN""<< endl;
@@ -779,7 +801,22 @@ void Comandos::login(string id, string pwd, string user) {
 
 
 
-}*/
+}
+
+//========================================= COMANDO LOGOUT =======================================
+void Comandos::logout() {
+    if (user_g.logged) {
+        user_g.logged = 0;
+        user_g.user = "";
+        user_g.pwd = "";
+        user_g.group = "";
+        user_g.id = "";
+        cout <<RED " SESIÓN TERMINADA! " << CYN""<< endl;
+    }
+    else
+        cout <<RED "NO EXISTE UNA SESION INICIADA! " << CYN""<< endl;
+}
+
 
 //================================== FUNCIONES AUXILIARES==========================
 string Comandos::obtener_usuarios(string id) {

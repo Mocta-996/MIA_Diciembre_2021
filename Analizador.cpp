@@ -10,6 +10,7 @@
 #include "Mount.h"
 #include "Mkfs.h"
 #include "Reportes.h"
+#include "Comandos.h"
 #include <iostream>
 #define RED "\e[0;31m"  // rojo
 #define GRN "\e[0;32m" // verde
@@ -69,7 +70,7 @@ void Analizador::Analizar_Comando(string _entrada) {
     }else if(instruccion =="mount")
     {
         verificar_mount(arrayinstrucciones);
-    }else if(instruccion =="umount")
+    }else if(instruccion =="unmount")
     {
         verificar_unmount(arrayinstrucciones);
     }
@@ -80,6 +81,11 @@ void Analizador::Analizar_Comando(string _entrada) {
     else if(instruccion  =="login")
     {
         verificar_login(arrayinstrucciones);
+    }
+    else if(instruccion  =="login")
+    {
+        Comandos logout;
+        logout.logout();
     }
     else if(instruccion == "rep")
     {
@@ -680,10 +686,13 @@ void Analizador::verificar_login(vector <string> lineainstruccion)
         bandera = false;
     }
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS LOGIN" <<endl;
+        /*cout << "PARAMETROS OBTENIDOS LOGIN" <<endl;
         cout << "id: " << id << endl;
         cout << "pwd: " << pwd << endl;
-        cout << "usr: " << usr << endl;
+        cout << "usr: " << usr << endl;*/
+        Comandos login;
+        login.login(id,pwd,usr);
+
         /*Mount montar;
         montar.UnMontar( id);*/
 
@@ -808,6 +817,7 @@ void Analizador::verificar_reporte(vector <string> lineainstruccion)
             cout << "name: " << name << endl;
             cout << "id: " << id << endl;
             cout << "path: " << path << endl;
+            reporte.Reporte_tree(id,path,name);
         }// reporte inode
         else if(aux== "sb"){
             cout << "PARAMETROS OBTENIDOs DE REPORTE SB" <<endl;

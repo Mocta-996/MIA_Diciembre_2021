@@ -226,11 +226,12 @@ void Reportes::Reporte_disk(string id, string path) {
                                        "</tr></table></td>";
                             grafica += "<td> \n"
                                   "<table border='0' cellborder='1' cellpadding='10' cellspacing='0'>\n"
-                                  "<tr><td colspan=\"23\">Extendida: " + name +"</td></tr>\n"
-                                  "<tr>" + get_tablaebr(mbr_data, disco_base,mbr_data.disco_particion[part_index].part_size) +
-                                  "</tr>\n"
-                                  "</table>\n"
-                                  "</td>";
+                                  "<tr><td colspan=\"23\">Extendida: " + name +"</td></tr>\n" ;
+                            string a= "";
+                            a =  "<tr>" + get_tablaebr(mbr_data, disco_base,mbr_data.disco_particion[part_index].part_size) +"</tr>\n"  ;
+                            a==  "<tr> </tr>\n"? "":a;
+                            grafica +=a;
+                            grafica +=  "</table>\n</td>";
                         }
 
                     } else {
@@ -428,27 +429,27 @@ void Reportes::Reporte_tree(string id, string path,string name){
                             " [shape=none, margin=0, label=<<table "
                             "border=\"0\" "
                             "cellborder=\"1\" cellspacing=\"0\" cellpadding=\"4\">" +
-                            "<tr><td bgcolor=\"#03A9F4\"><font color=\"white\"><b>INode" +
-                            to_string(indice_inodo) + "</b></font></td></tr>" +
-                            "<tr><td bgcolor=\"#b3e5fc\">Append time: " + atime + "</td></tr>" +
-                            "<tr><td bgcolor=\"#e1f5fe\">Creation time: " + ctime +
-                            "</td></tr>" + "<tr><td bgcolor=\"#b3e5fc\">Modify time: " + mtime +
-                            "</td></tr>" + "<tr><td bgcolor=\"#e1f5fe\">Type: " +
-                            (actual_inodo.i_type == '1' ? "Directory" : "File") + "</td></tr>" +
-                            "<tr><td bgcolor=\"#b3e5fc\">Size: " +
+                            "<tr><td ><b>INODO:" +
+                            to_string(indice_inodo) + "</b></td></tr>" +
+                            "<tr><td>I_TIME : " + atime + "</td></tr>" +
+                            "<tr><td>I_CTIME: " + ctime +
+                            "</td></tr>" + "<tr><td>I_MTIMEe: " + mtime +
+                            "</td></tr>" + "<tr><td >TIpo : " +
+                            (actual_inodo.i_type == '1' ? "Directorio " : "Archivo") + "</td></tr>" +
+                            "<tr><td >Tamaño: " +
                             to_string(actual_inodo.i_size) + "</td></tr>" +
-                            "<tr><td bgcolor=\"#e1f5fe\">Permissions: " +
+                            "<tr><td >Permisos : " +
                             to_string(actual_inodo.i_perm) + "</td></tr>" +
-                            "<tr><td bgcolor=\"#b3e5fc\">UID: " + to_string(actual_inodo.i_uid) +
+                            "<tr><td >UID: " + to_string(actual_inodo.i_uid) +
                             "</td></tr>" +
-                            "<tr><td bgcolor=\"#e1f5fe\">GID: " + to_string(actual_inodo.i_gid) +
+                            "<tr><td >GID: " + to_string(actual_inodo.i_gid) +
                             "</td></tr>";
 
                     for (int i = 0; i < 15; i++) {
                         if (actual_inodo.i_block[i] != -1) {
-                            string color = i % 2 == 0 ? "b3e5fc" : "e1f5fe";
+                            //string color = i % 2 == 0 ? "b3e5fc" : "e1f5fe";
                             int indice_sb = (int)(((super_bloque_reporte.s_block_start - actual_inodo.i_block[i]) *-1) /sizeof(Estructuras::Bloque_archivos));
-                            grafica += "<tr><td bgcolor=\"#" + color + "\">Block " +
+                            grafica += "<tr><td >Block " +
                                        to_string(i + 1) + ": #" +
                                        to_string(indice_sb) + "</td></tr>";
                         }
@@ -466,10 +467,10 @@ void Reportes::Reporte_tree(string id, string path,string name){
                                 grafica += block_id +
                                        " [shape=none, margin=0, label=<<table border=\"0\" "
                                        "cellborder=\"1\" cellspacing=\"0\" cellpadding=\"4\">" +
-                                       "<tr><td bgcolor=\"#ff6f00\"><font "
-                                       "color=\"white\"><b>" +
+                                       "<tr><td >   "
+                                       "<b>" +
                                            "Block " + to_string(sup_block_index) +
-                                           "</b></font></td></tr></table>>];";
+                                           "</b></td></tr></table>>];";
                                 grafica += id_ino + " -> " + block_id + ";";
 
                                 //=========================  BUSCAR CONTENIDO
@@ -484,15 +485,14 @@ void Reportes::Reporte_tree(string id, string path,string name){
                                                " [shape=none, margin=0, label=<<table border=\"0\" "
                                                "cellborder=\"1\" cellspacing=\"0\" "
                                                "cellpadding=\"4\">" +
-                                               "<tr><td bgcolor=\"#4caf50\"><font "
-                                               "color=\"white\"><b>Directory "
-                                               "Content</b></font></td></tr>" +
-                                                   "<tr><td bgcolor=\"#a5d6a7\">Name: " + nombre_b +
-                                                   "</td></tr>" + "<tr><td bgcolor=\"#c8e6c9\">INode: " +
+                                               "<tr><td >"
+                                               "<b>Directorio "
+                                               "Content</b></td></tr>" +
+                                                   "<tr><td >Nombre: " + nombre_b +
+                                                   "</td></tr>" + "<tr><td >INODO: " +
                                                    to_string(indice_siguiente) + "</td></tr>" +
                                                    "</table>>];";
-                                        grafica += block_id + " -> " + content_id + " [label=\"" +
-                                                   to_string(k + 1) + "\"];";
+                                        grafica += block_id + " -> " + content_id + " ;";
 
                                         Estructuras::Inodo aux_inodo;
                                         fseek(disco_base_r, siguiente_inodo, SEEK_SET);
@@ -500,7 +500,7 @@ void Reportes::Reporte_tree(string id, string path,string name){
 
                                         _inodos.push_back(aux_inodo);
                                         inicio_inodos.push_back(siguiente_inodo);
-                                        grafica += content_id + " -> " + "INode" +
+                                        grafica += content_id + " -> " + "INODO" +
                                                    to_string(siguiente_inodo) + ";";
                                     }
                                 }
@@ -525,11 +525,10 @@ void Reportes::Reporte_tree(string id, string path,string name){
                                        " [shape=none, margin=0, label=<<table "
                                        "border=\"0\" "
                                        "cellborder=\"1\" cellspacing=\"0\" cellpadding=\"4\">" +
-                                       "<tr><td bgcolor=\"#FFC107\"><font "
-                                       "color=\"white\"><b>" +
+                                       "<tr><td > "
+                                       "<b>" +
                                            "Block " + to_string(sup_block_index) +
-                                       "</b></font></td></tr><tr><td "
-                                       "bgcolor=\"#FFF9C4\">" +
+                                       "</b></td></tr><tr><td>" +
                                            file_content + "     </td></tr></table>>];";
                                 grafica += id_ino + " -> " + block_id + ";";
                             }

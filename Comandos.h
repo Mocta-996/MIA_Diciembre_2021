@@ -26,6 +26,17 @@ public:
     bool Verificar_permiso(Estructuras::Inodo inodo, int per);
 
     string obtener_usuarios(string id);
+    typedef struct  {
+        string tipo;
+        string nombre;
+        string pwd;
+        string grupo;
+        string uid;
+    }Usuario_log;
+
+    void login(string id, string pwd, string user);
+
+    void logout();
 };
 
 

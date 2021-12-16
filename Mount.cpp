@@ -11,8 +11,10 @@
 #include <iostream>
 #include <algorithm>
 #include "Estructuras.h"
+#include "Globales.h"
 #include <charconv>
 using namespace std;
+
 Mount::Mount() {
 
 }
@@ -103,8 +105,8 @@ void Mount::Montar(string path, string name){
                                                                                                         : disco_montar.disco_particion[particion_index].part_start);
                 string nombre_particion;
                 int numero_disco=1;
-                int letra_particion=65;
-                int nuevaletra =65;
+                int letra_particion=97;
+                int nuevaletra =97;
                 bool nuevo_mount =true;
                 // buscando numero de disco
                 if(!Lista_part_montadas.empty()){
@@ -123,7 +125,7 @@ void Mount::Montar(string path, string name){
                 }
                 string  l;
                 l.assign(1, letra_particion);
-                string partition_id = "VD"+l+ to_string(numero_disco);
+                string partition_id = "vd"+l+ to_string(numero_disco);
 
                 // EN PARTICIONES PRIMARIAS Y EXTENDIDAS
                 if (particion_index != -1)

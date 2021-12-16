@@ -43,6 +43,16 @@ public:
     void verificar_unmount(vector<string> lineainstruccion);
 
     void verificar_mkfs(vector<string> lineainstruccion);
+
+    void verificar_login(vector<string> lineainstruccion);
+
+    void verificar_reporte(vector<string> lineainstruccion);
+
+    void Ejecutar_exec(string path);
+
+    void verificar_exec(vector<string> lineainstruccion);
+
+    void Ejecutar_pause();
 };
 
 #endif //PROYECTO_1_ANALIZADOR_H

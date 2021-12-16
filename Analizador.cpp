@@ -9,10 +9,12 @@
 #include "Fdisco.h"
 #include "Mount.h"
 #include "Mkfs.h"
+#include "Reportes.h"
 #include <iostream>
 #define RED "\e[0;31m"  // rojo
 #define GRN "\e[0;32m" // verde
 #define CYN "\e[0;36m" // cian
+#define YLLW "\e[0;33m"
 using namespace std;
 
 
@@ -75,13 +77,21 @@ void Analizador::Analizar_Comando(string _entrada) {
     {
         verificar_mkfs(arrayinstrucciones);
     }
+    else if(instruccion  =="login")
+    {
+        verificar_login(arrayinstrucciones);
+    }
     else if(instruccion == "rep")
     {
-        //verificar_reporte(arrayinstrucciones;
+        verificar_reporte(arrayinstrucciones);
+    }
+    else if(instruccion == "pause")
+    {
+        Ejecutar_pause();
     }
     else if(instruccion  =="exec")
     {
-        //verificar_exec(arrayinstrucciones);
+        verificar_exec(arrayinstrucciones);
     }
     else if(instruccion.substr(0,1)  =="#")
     {
@@ -176,11 +186,11 @@ void Analizador::verificar_mkdisk(vector <string> lineainstruccion)
         bandera = false;
     }
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
+        /*cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
         cout << "Size: " << size << endl;
         cout << "path: " << path << endl;
         cout << "Unit: " << unit << endl;
-        cout << "Fit: " << fit << endl;
+        cout << "Fit: " << fit << endl;*/
 
         int s=stoi(size);
         if(s){
@@ -231,8 +241,8 @@ void Analizador::verificar_rmdisk(vector <string> lineainstruccion)
     }
 
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS RMDISK" <<endl;
-        cout << "path: " << path << endl;
+        /*cout << "PARAMETROS OBTENIDOS RMDISK" <<endl;
+        cout << "path: " << path << endl;*/
         RMdisco eliminar;
         eliminar.Eliminar_disco(path);
     }else {
@@ -361,11 +371,11 @@ void Analizador::verificar_fdisk(vector <string> lineainstruccion)
         {
             // CASO ELIMINAR PARTICION
             if(eliminar !=""){
-                cout << "PARAMETROS OBTENIDOS ELIMINAR PARTICION" <<endl;
+                /*cout << "PARAMETROS OBTENIDOS ELIMINAR PARTICION" <<endl;
                 cout << "path: " << path << endl;
                 cout << "eliminar: " << eliminar << endl;
                 cout << "name: " << name << endl;
-                //accion de ,eliminar, path,name
+                //accion de ,eliminar, path,name*/
                 Fdisco agregar;
                 agregar.Eliminar_particion(eliminar,path , name);
             }
@@ -374,11 +384,11 @@ void Analizador::verificar_fdisk(vector <string> lineainstruccion)
                 if(unit ==""){
                     unit = "k";
                 }
-                cout << "PARAMETROS OBTENIDOS ADD PARTICION" <<endl;
+                /*cout << "PARAMETROS OBTENIDOS ADD PARTICION" <<endl;
                 cout << "path: " << path << endl;
                 cout << "Unit: " << unit << endl;
                 cout << "name: " << name << endl;
-                cout << "add: " << add << endl;
+                cout << "add: " << add << endl;*/
                 int tam= 0;
                 try {
                     tam= stoi(add);
@@ -409,13 +419,13 @@ void Analizador::verificar_fdisk(vector <string> lineainstruccion)
                     cout <<RED""<< "NO SE CREO LA PARTICION!" <<CYN""<<endl;
                 }
                 if(tam>0){
-                    cout << "PARAMETROS OBTENIDOS CREACION DE PARTICION" <<endl;
+                    /*cout << "PARAMETROS OBTENIDOS CREACION DE PARTICION" <<endl;
                     cout << "Size: " << size << endl;
                     cout << "path: " << path << endl;
                     cout << "Unit: " << unit << endl;
                     cout << "Fit: " << fit << endl;
                     cout << "Type: " << type << endl;
-                    cout << "name: " << name << endl;
+                    cout << "name: " << name << endl;*/
                     Fdisco agregar_particion;
                     agregar_particion.Crear_particion(tam,fit,unit,path,type,name);
                     // agregar aacion de crear particion, name, path, size, fit, type, unit,
@@ -488,14 +498,14 @@ void Analizador::verificar_mount(vector <string> lineainstruccion)
         bandera = false;
     }
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
+        /*cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
         cout << "Size: " << name << endl;
-        cout << "path: " << path << endl;
+        cout << "path: " << path << endl;*/
         Mount montar;
         montar.Montar(path, name);
 
     }else {
-        cout <<RED""<< _error <<CYN""<<endl;
+        cout <<RED""<< _error <<YLLW"   PARA EL COMANDO MOUNT"<<CYN""<<endl;
     }
 
 }
@@ -507,8 +517,6 @@ void Analizador::verificar_unmount(vector <string> lineainstruccion)
     string _error="";
     bool bandera= true;
 
-    //--- se recorren primero los parametros obligatorios
-    //--- param. -SIZE , -PATH
     for(int i=1;i<lineainstruccion.size();i++ ){
         int pos = lineainstruccion[i].find(":");
         string param = Analizador::StringToLower(lineainstruccion[i].substr(0,pos-1));
@@ -531,8 +539,8 @@ void Analizador::verificar_unmount(vector <string> lineainstruccion)
         bandera = false;
     }
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
-        cout << "id: " << id << endl;
+        /*cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
+        cout << "id: " << id << endl;*/
         Mount montar;
         montar.UnMontar( id);
 
@@ -608,10 +616,10 @@ void Analizador::verificar_mkfs(vector <string> lineainstruccion)
         bandera = false;
     }
     if(bandera){
-        cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
+        /*cout << "PARAMETROS OBTENIDOS MKDIR" <<endl;
         cout << "Id: " << id << endl;
         cout << "Type: " << type << endl;
-        cout << "fs: " << fs << endl;
+        cout << "fs: " << fs << endl;*/
         Mkfs formateo;
         formateo.formateo_particion(id,type,fs);
     }else {
@@ -619,6 +627,250 @@ void Analizador::verificar_mkfs(vector <string> lineainstruccion)
     }
 
 }
+
+// ================================  verifica los paramentros que para el comando Login ========================
+void Analizador::verificar_login(vector <string> lineainstruccion)
+{
+    string usr="";
+    string pwd="";
+    string id="";
+    string _error="";
+    bool bandera= true;
+
+    //--- se recorren primero los parametros obligatorios
+    //--- param. -SIZE , -PATH
+    for(int i=1;i<lineainstruccion.size();i++ ){
+        int pos = lineainstruccion[i].find(":");
+        string param = Analizador::StringToLower(lineainstruccion[i].substr(0,pos-1));
+        //cout << "parametro: " << param << endl;
+        if(param =="-usr"){
+            if(lineainstruccion[i].substr(pos+2,1) =="\""){
+                usr = Analizador::RutaCompleta(lineainstruccion,i);
+                int salto = RutaCompletaSaltos(lineainstruccion,i);
+                i=i+salto;
+            }else{
+                usr =Analizador::AtributoComando(lineainstruccion[i]);
+            }
+        }
+        else if(param =="-id"){
+            id =Analizador::AtributoComando(lineainstruccion[i]);
+        }
+        else if(param =="-pwd"){
+            pwd =Analizador::AtributoComando(lineainstruccion[i]);
+        }
+        else if(param.substr(0,1) =="#"){
+            cout << "Comentario" <<param<<endl;
+            break;
+        }
+        else {
+            _error= "ENTRADA NO VALIDA: \"" + param + "\"  EN EL COMANDO UNMOUNT  ";
+            bandera = false;
+        }
+    }
+    if(id ==""){
+        _error = "NOMBRE NO VALIDO! ";
+        bandera = false;
+    }
+    if(pwd ==""){
+        _error = "CONTRASEÑA  NO VALIDA!";
+        bandera = false;
+    }
+    if(usr ==""){
+        _error = "USUARIO NO VALIDO!";
+        bandera = false;
+    }
+    if(bandera){
+        cout << "PARAMETROS OBTENIDOS LOGIN" <<endl;
+        cout << "id: " << id << endl;
+        cout << "pwd: " << pwd << endl;
+        cout << "usr: " << usr << endl;
+        /*Mount montar;
+        montar.UnMontar( id);*/
+
+    }else {
+        cout <<RED""<< _error <<YLLW"   PARA EL COMANDO LOGIN"<<CYN""<<endl;
+    }
+
+}
+
+// ================================  verifica los paramentros que para el comando reporte ========================
+void Analizador::verificar_reporte(vector <string> lineainstruccion)
+{
+    string name="";
+    string path="";
+    string id="";
+    string ruta="";
+    string _error="";
+    bool bandera= true;
+
+    //--- se recorren primero los parametros obligatorios
+    //--- param. -SIZE , -PATH
+    for(int i=1;i<lineainstruccion.size();i++ ){
+        int pos = lineainstruccion[i].find(":");
+        string param = Analizador::StringToLower(lineainstruccion[i].substr(0,pos-1));
+        //cout << "parametro: " << param << endl;
+        if(param =="-path"){
+            if(lineainstruccion[i].substr(pos+2,1) =="\""){
+                path = Analizador::RutaCompleta(lineainstruccion,i);
+                int salto = RutaCompletaSaltos(lineainstruccion,i);
+                i=i+salto;
+            }else{
+                path =Analizador::AtributoComando(lineainstruccion[i]);
+            }
+        }
+        else if(param =="-name"){
+            name =Analizador::AtributoComando(lineainstruccion[i]);
+        }
+        else if(param =="-id"){
+            id =Analizador::AtributoComando(lineainstruccion[i]);
+        }
+        else if(param =="-ruta"){
+            if(lineainstruccion[i].substr(pos+2,1) =="\""){
+                ruta = Analizador::RutaCompleta(lineainstruccion,i);
+                int salto = RutaCompletaSaltos(lineainstruccion,i);
+                i=i+salto;
+            }else{
+                ruta =Analizador::AtributoComando(lineainstruccion[i]);
+            }
+        }
+        else if(param.substr(0,1) =="#"){
+            cout << "Comentario" <<param<<endl;
+            break;
+        }
+        else {
+            _error= "ENTRADA NO VALIDA: \"" + param + "\"  EN EL COMANDO UNMOUNT  ";
+            bandera = false;
+        }
+    }
+    if(id ==""){
+        _error = "ID REPORTE NO VALIDO! ";
+        bandera = false;
+    }
+    if(name ==""){
+        _error = "NOMBRE  DE REPORTE NO VALIDO!";
+        bandera = false;
+    }
+    if(path ==""){
+        _error = "RUTA DE REPORTE NO VALIDO!";
+        bandera = false;
+    }
+    if(bandera){
+        Reportes  reporte;
+        string aux= StringToLower(name);
+        // reporte mbr
+        if(aux== "mbr"){
+            /*cout << "PARAMETROS OBTENIDOs DE REPORTE MBR" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;*/
+            reporte.Reporte_mbr( id,  path);
+        }// reporte disk
+        else if(aux== "disk"){
+            /*cout << "PARAMETROS OBTENIDOs DE REPORTE DISK" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;*/
+            reporte.Reporte_disk( id,  path);
+
+        }// reporte inode
+        else if(aux== "inode"){
+            /*cout << "PARAMETROS OBTENIDOs DE REPORTE Inode" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;*/
+        }// reporte journaling
+        else if(aux== "journaling"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE JOURNALING" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }// reporte block
+        else if(aux== "block"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE BLOCK" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }// reporte bm inode
+        else if(aux== "bm_inode"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE BMINODE" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }// reporte bm block
+        else if(aux== "bm_block"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE BMBLOCK" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }// reporte tree
+        else if(aux== "tree"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE TREE" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }// reporte inode
+        else if(aux== "sb"){
+            cout << "PARAMETROS OBTENIDOs DE REPORTE SB" <<endl;
+            cout << "name: " << name << endl;
+            cout << "id: " << id << endl;
+            cout << "path: " << path << endl;
+        }
+
+
+        /*Mount montar;
+        montar.UnMontar( id);*/
+
+    }else {
+        cout <<RED""<< _error <<YLLW"   PARA EL COMANDO REPORTE"<<CYN""<<endl;
+    }
+
+}
+
+// ================================  verifica los paramentros que para el comando Mount ========================
+void Analizador::verificar_exec(vector <string> lineainstruccion)
+{
+
+    string path="";
+    string _error="";
+    bool bandera= true;
+
+    for(int i=1;i<lineainstruccion.size();i++ ){
+        int pos = lineainstruccion[i].find(":");
+        string param = Analizador::StringToLower(lineainstruccion[i].substr(0,pos-1));
+        if(param =="-path")
+        {
+            if(lineainstruccion[i].substr(pos+2,1) =="\""){
+                path = Analizador::RutaCompleta(lineainstruccion,i);
+                int salto = RutaCompletaSaltos(lineainstruccion,i);
+                i=i+salto;
+            }else{
+                path =Analizador::AtributoComando(lineainstruccion[i]);
+            }
+        }
+        else if(param.substr(0,1) =="#"){
+            cout << "Comentario" <<param<<endl;
+            break;
+        }
+        else {
+            _error= "ENTRADA NO VALIDA: \"" + param + "\"  EN EL COMANDO MOUNT  \"" + path+"\"";
+            bandera = false;
+        }
+    }
+    if(path ==""){
+        _error = "PATH NO VALIDO!";
+        bandera = false;
+    }
+    if(bandera){
+        /*cout << "PARAMETROS OBTENIDOS EXEC" <<endl;
+        cout << "path: " << path << endl;*/
+        Ejecutar_exec(path);
+
+    }else {
+        cout <<RED""<< _error <<YLLW"   PARA EL COMANDO EXEC"<<CYN""<<endl;
+    }
+
+}
+
 //================================================ FUNCIONES AUXILIARES ============================================
 // ---- funcion que convierte las palabras en minuscula
 // ---- recibe como parametro un array de strings
@@ -682,3 +934,40 @@ int Analizador::RutaCompletaSaltos(vector<string> ruta, int pos)
     return salto;
 }
 
+//=========================================== COMANDO EXEC =======================
+void Analizador::Ejecutar_exec(string path)
+{
+    vector <string> comandos_exec;
+    ifstream a(path.c_str());
+    if(a){
+        std::string entrada;
+        while (std::getline(a, entrada))
+        {
+            std::istringstream iss(entrada);
+            if (entrada != "" && entrada != "\n")
+            {
+                comandos_exec.push_back(entrada);
+                //cout << "COMANDO INGRESANDO: "<<entrada << endl;
+                //
+            }
+        }
+        cout<< "COMANDOS EXEC INGRESADOS"<<endl;
+        for(int i=0; i<comandos_exec.size();i++){
+            //cout<< comandos_exec[i]<<endl;
+            Analizador::Analizar_Comando(comandos_exec[i]);
+        }
+    }else {
+        cout<<RED "NO SE ENCONTRO EL ARCHIVO PARA EL COMANDO EXEC!  "<<YLLW""<<path<<endl;
+    }
+
+}
+
+//=========================================== COMANDO PAUSE =======================
+void Analizador::Ejecutar_pause()
+{
+    int flag;
+    cout<<YLLW "PROCESO PAUSADO!  "<<CYN""<<endl;
+    cout<<YLLW "PRESIONE ENTER PARA CONTINUAR!  "<<CYN""<<endl;
+    flag = getc(stdin);
+    cout<<YLLW "CONTINUANDO...  "<<CYN""<<endl;
+}

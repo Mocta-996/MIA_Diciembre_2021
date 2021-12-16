@@ -18,6 +18,12 @@ public:
 
     void Crear_Disco(int size, std::__cxx11::basic_string<char> fit, std::__cxx11::basic_string<char> unit,
                      std::__cxx11::basic_string<char> path);
+
+    string Fecha_actual();
+
+    string formato_fecha(int field);
+
+    string Obtener_fecha();
 };
 
 

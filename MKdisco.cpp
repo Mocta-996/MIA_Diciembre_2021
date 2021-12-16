@@ -104,9 +104,10 @@ void MKdisco::Crear_Disco(int size, string fit, string unit, string path)
     Estructuras::MBRdisco crear_disco;
     crear_disco.mbr_tamano= unit=="k"? size*1024: size *1024*1024;
     crear_disco.disk_fit =fit[0];
-    crear_disco.mbr_fecha_creacion=time(nullptr);
+    //crear_disco.mbr_fecha_creacion= Fecha_actual();
     crear_disco.disk_signature=rand() % 100;
-
+    string date = Obtener_fecha();
+    strcpy(crear_disco.mbr_fecha_creacion, date.c_str());
 
     //Creando EBR inicial
     string _name = "-";
@@ -194,3 +195,19 @@ void MKdisco::Crear_Disco(int size, string fit, string unit, string path)
     }
     //cout << "Bits del MBR: " << sizeof(Estructuras::MBRdisco) << endl;
 }
+
+//============= Obtener fecha =================
+string MKdisco:: Obtener_fecha() {
+    time_t time_now = time(0);
+    tm *now = localtime(&time_now);
+    string retornar_fecha =
+            formato_fecha(now->tm_mday) + "/" + formato_fecha(now->tm_mon + 1) +
+            "/" + to_string(now->tm_year + 1900) + " " +
+                    formato_fecha(now->tm_hour) + ":" + formato_fecha(now->tm_min);
+    return retornar_fecha;
+}
+
+string MKdisco::formato_fecha(int field) {
+    return (field < 10 ? "0" : "") + to_string(field);
+}
+

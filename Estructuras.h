@@ -15,10 +15,10 @@ public:
     // ============================== ESTRUCTURA PARA PARTICIONES  ===================================
     typedef struct
     {
-        char part_status;             // indica estado de particion/ '0' no usado /'1' usado
-        char part_type;                // tipo de particion primaria: p,e,l
+        char part_status ;             // indica estado de particion/ '0' no usado /'1' usado
+        char part_type ;                // tipo de particion primaria: p,e,l
         char part_fit ;                // tipo de ajuste de la particion: wf,ff,bf
-        int part_start;                  // indica en que parte del disco inicia la particion -1
+        int part_start ;                  // indica en que parte del disco inicia la particion -1
         int part_size ;                  // contiene el tamaño total de la particion 0
         char part_name[16];            // nombre de la particion
     } Particion; //typedef
@@ -26,9 +26,9 @@ public:
     // ================================== ESTRUCTURA DEL MBR PARA CREACION DE DISCOS ===================
     typedef struct
     {
-        int mbr_tamano;                     // tamaño del  disco
-        time_t mbr_fecha_creacion;          // fecha de creacion del disco
-        int disk_signature;                 // identificacion unica del disco
+        int mbr_tamano ;                     // tamaño del  disco
+        char mbr_fecha_creacion[17];          // fecha de creacion del disco
+        int disk_signature ;                 // identificacion unica del disco
         char disk_fit;                      // tipo de ajuste del disco
         Particion disco_particion[4];       // particiones del disco
 
@@ -119,7 +119,7 @@ public:
 
     typedef struct  {
         Content b_content[4];
-    }Bloque_carpeta;
+    }Bloque_carpeta; //dirBlock
     //==============================  bloque de archivos=================
     typedef struct  {
         char content[64];

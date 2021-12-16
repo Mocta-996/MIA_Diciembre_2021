@@ -13,10 +13,11 @@ using namespace std;
 class Mount {
 public:
     Mount();
-    static deque<Estructuras::Particiones_Montadas> Lista_part_montadas;
+
     void Montar(string path, string name);
 
     void UnMontar(string id);
+
 };
 
 

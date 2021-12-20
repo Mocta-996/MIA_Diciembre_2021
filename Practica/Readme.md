@@ -20,19 +20,21 @@
 #### Descripcion de la aplicación:
 * Es una aplicacion de consola, se ejecuta mediante una script sh, cuyp nombre es "Ejecutable.sh"
 
+#### Video explicativo:
+[linkname](https://youtu.be/yfDkuHSHSWk)
+--- 
+## Cantidad de datos cargados en tablas ER
+---
+![datostablasEr](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/dbc25a77c50103d7d4c05033a41b3cabfb93ad87/Practica/scr1.png)
+## Resultado de Consultas
+---
+![resultadoconsultas](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/dbc25a77c50103d7d4c05033a41b3cabfb93ad87/Practica/src2.png)
+![resultadoconsultas](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/dbc25a77c50103d7d4c05033a41b3cabfb93ad87/Practica/src3.png)
+![resultadoconsultas](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/dbc25a77c50103d7d4c05033a41b3cabfb93ad87/Practica/src4.png)
+
 ## Modelo Entidad Relacion
 ---
 ![Generado con Oracle Data Modeler](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/0b5bf1de01b091de0f4cb8ecb994a042fdb0ddff/Practica/ModeloER.png)
 
-## Sistema de Archivos EXT2/EXT3
----
-
-## Administración de Usuarios y Grupos
----
-
-
-## SCRIPT
----
-Son archivos con los comandos definidos que podran cargarse al sistema. Tienen la extensión sh y se ejecutan con  el comando exec.
 
 

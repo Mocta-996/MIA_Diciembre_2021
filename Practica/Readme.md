@@ -14,14 +14,15 @@
 
 #### Lenguajes y herramientas:
 * DBMS Mysql 
+* Oracle Data Modeler
 * S.O Ubuntu 20.04
 
 #### Descripcion de la aplicación:
 * Es una aplicacion de consola, se ejecuta mediante una script sh, cuyp nombre es "Ejecutable.sh"
 
-## Datos totales de las tablas 
+## Modelo Entidad Relacion
 ---
-![texto_alternativo](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/0b5bf1de01b091de0f4cb8ecb994a042fdb0ddff/Practica/ModeloER.png){width='100px'}
+![Generado con Oracle Data Modeler](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/0b5bf1de01b091de0f4cb8ecb994a042fdb0ddff/Practica/ModeloER.png)
 
 ## Sistema de Archivos EXT2/EXT3
 ---

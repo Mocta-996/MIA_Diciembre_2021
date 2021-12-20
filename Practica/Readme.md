@@ -21,7 +21,7 @@
 * Es una aplicacion de consola, se ejecuta mediante una script sh, cuyp nombre es "Ejecutable.sh"
 
 #### Video explicativo:
-[linkname](https://youtu.be/yfDkuHSHSWk)
+[link YouTube](https://youtu.be/yfDkuHSHSWk)
 --- 
 ## Cantidad de datos cargados en tablas ER
 ---

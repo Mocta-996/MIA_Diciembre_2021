@@ -21,7 +21,7 @@
 
 ## Datos totales de las tablas 
 ---
-![texto_alternativo](Practica/ModeloER.png){width='100px'}
+![texto_alternativo](https://github.com/Mocta-996/MIA_Diciembre_2021/blob/0b5bf1de01b091de0f4cb8ecb994a042fdb0ddff/Practica/ModeloER.png){width='100px'}
 
 ## Sistema de Archivos EXT2/EXT3
 ---

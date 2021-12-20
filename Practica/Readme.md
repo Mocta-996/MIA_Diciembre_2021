@@ -21,7 +21,7 @@
 
 ## Datos totales de las tablas 
 ---
-![texto_alternativo](Practica/ModeloER.png){width=width height=height}
+![texto_alternativo](Practica/ModeloER.png){width='100px'}
 
 ## Sistema de Archivos EXT2/EXT3
 ---
